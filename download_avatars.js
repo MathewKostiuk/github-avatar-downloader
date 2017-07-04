@@ -19,6 +19,8 @@ function getRepoContributors(repoOwner, repoName, cb) {
       'User-Agent': 'avatar_downloader'
     }
   };
+
+
   request.get(options, requestURL)
   .on('error', function (err) {
     console.log(err);
@@ -33,9 +35,9 @@ function getRepoContributors(repoOwner, repoName, cb) {
   })
   .on('end', function() {
     json = JSON.parse(buf);
-    console.log(json);
-    //console.log(buf);
-  })
+    //console.log(json);
+    cb(null, json);
+  });
 
 
 
@@ -43,9 +45,11 @@ function getRepoContributors(repoOwner, repoName, cb) {
 
 
 
+console.log(json.avatar_url);
 
-
-getRepoContributors("python", "cpython", function(err, result) {
-  console.log("Errors:", err);
-  console.log("Result:", result);
+getRepoContributors("jquery", "jquery", function(err, json) {
+  for (let i = 0; i < json.length; i++) {
+    const avatarUrl = json[i].avatar_url;
+    console.log(avatarUrl);
+  }
 });
