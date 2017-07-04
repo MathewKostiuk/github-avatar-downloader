@@ -4,6 +4,9 @@ const GITHUB_USER = "MathewKostiuk";
 let json = '';
 let buf = '';
 
+const repoOwner = process.argv[2];
+const repoName = process.argv[3];
+
 
 
 console.log('Welcome to the Github Avatar Downloaded!');
@@ -45,12 +48,12 @@ function getRepoContributors(repoOwner, repoName, cb) {
 
 
 
-console.log(json.avatar_url)
-getRepoContributors("jquery", "jquery", function(err, json) {
+//console.log(json.avatar_url)
+getRepoContributors(repoOwner, repoName, function(err, json) {
   for (let i = 0; i < json.length; i++) {
     const avatarUrl = json[i].avatar_url;
     const login = json[i].login;
-    const loginName = "./avatars/" + login + ".png";
+    const loginName = "./avatars/" + login + ".jpg";
     downloadImageByURL(avatarUrl, loginName);
   }
 });
