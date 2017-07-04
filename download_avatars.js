@@ -1,6 +1,8 @@
 const request = require('request');
 const fs = require('fs');
 const GITHUB_USER = "MathewKostiuk";
+let json = '';
+let buf = '';
 
 
 
@@ -17,7 +19,6 @@ function getRepoContributors(repoOwner, repoName, cb) {
       'User-Agent': 'avatar_downloader'
     }
   };
-
   request.get(options, requestURL)
   .on('error', function (err) {
     console.log(err);
@@ -25,15 +26,26 @@ function getRepoContributors(repoOwner, repoName, cb) {
   .on('response', function (response) {
     console.log(response.statusCode);
     //console.log(response.headers);
-    console.log(response);
+    //console.log(response);
   })
+  .on('data', function(chunk) {
+     buf += chunk;
+  })
+  .on('end', function() {
+    json = JSON.parse(buf);
+    console.log(json);
+    //console.log(buf);
+  })
+
+
+
 }
 
 
 
 
 
-getRepoContributors("jquery", "jquery", function(err, result) {
+getRepoContributors("python", "cpython", function(err, result) {
   console.log("Errors:", err);
   console.log("Result:", result);
 });
