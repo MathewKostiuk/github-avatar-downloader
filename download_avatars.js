@@ -9,10 +9,17 @@ const repoName = process.argv[3];
 
 
 
-console.log('Welcome to the Github Avatar Downloaded!');
+//console.log('Welcome to the Github Avatar Downloaded!');
 
 
 function getRepoContributors(repoOwner, repoName, cb) {
+
+
+  if (repoOwner || repoName === null) {
+    console.log("Error! Please provide valid repo name and repo owner name");
+    return;
+  }
+
   const requestURL = 'https://' + GITHUB_USER + ':' + process.env.GIT_HUB_ACCESS_TOKEN + '@api.github.com/repos/' + repoOwner + '/' + repoName + '/contributors';
   console.log(requestURL);
 
