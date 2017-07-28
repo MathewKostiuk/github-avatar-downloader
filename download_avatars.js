@@ -24,7 +24,6 @@ function getRepoContributors(repoOwner, repoName, cb) {
   }
 //concatenated string for url request. process.env is an environment variable
   const requestURL = 'https://' + GITHUB_USER + ':' + process.env.GIT_HUB_ACCESS_TOKEN + '@api.github.com/repos/' + repoOwner + '/' + repoName + '/contributors';
-  console.log(requestURL);
 
 //User-Agent required for github API
 
@@ -42,8 +41,6 @@ function getRepoContributors(repoOwner, repoName, cb) {
   })
   .on('response', function (response) {
     console.log(response.statusCode);
-    //console.log(response.headers);
-    //console.log(response);
   })
   .on('data', function(chunk) {
      buf += chunk;
@@ -53,13 +50,7 @@ function getRepoContributors(repoOwner, repoName, cb) {
     //console.log(json);
     cb(null, json);
   });
-
-
-
 }
-
-
-
 
 getRepoContributors(repoOwner, repoName, function(err, json) {
   for (let i = 0; i < json.length; i++) {
