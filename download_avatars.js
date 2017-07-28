@@ -60,7 +60,7 @@ function getRepoContributors(repoOwner, repoName, cb) {
 
 
 
-//console.log(json.avatar_url)
+
 getRepoContributors(repoOwner, repoName, function(err, json) {
   for (let i = 0; i < json.length; i++) {
     const avatarUrl = json[i].avatar_url;
